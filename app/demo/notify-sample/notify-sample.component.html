@@ -1,0 +1,57 @@
+<pg-container>
+
+  <div class="card card-default">
+    <div class="card-header separator m-b-10">
+      <h3>Summary</h3>
+      <p>
+        Notify.js is a plugin to provide simple yet fully customisable notifications.
+      </p>
+    </div>
+    <div class="card-block">
+      <div class="container-fluid">
+        <div class="row">
+
+          <div class="col-md-3 border-right">
+            <p>
+              You can click to Success button do demonstrate succcess message.
+            </p>
+            <button class="btn btn-success" (click)="onSuccess()">Success</button>
+          </div>
+
+          <div class="col-md-3 border-right">
+            <p>
+              You can click to Info button do demonstrate info message.
+            </p>
+            <button class="btn btn-info" (click)="onInfo()">Info</button>
+          </div>
+
+          <div class="col-md-3 border-right">
+            <p>
+              You can click to Warning button do demonstrate warning message.
+            </p>
+            <button class="btn btn-warning" (click)="onWarn()">Warning</button>
+          </div>
+
+          <div class="col-md-3">
+            <p>
+              You can click to Error button do demonstrate error message.
+            </p>
+            <button class="btn btn-danger" (click)="onError()">Error</button>
+          </div>
+        </div>
+        <br />
+      </div>
+
+    </div>
+
+  </div>
+  <div class="card card-default">
+    <div class="card-header separator m-b-10">
+      <h3>Customized Loader - NGX UI LOADER</h3>
+      <p>Customized Loader Example:</p>
+    </div>
+    <div class="card-body">
+      <button class="btn btn-success" (click)="setBusyUILoader()">Set Busy - Customized</button>
+    </div>
+  </div>
+</pg-container>

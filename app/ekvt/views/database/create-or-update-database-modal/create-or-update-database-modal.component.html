@@ -1,0 +1,188 @@
+<div class="special-Modal">
+  <div bsModal #databaseModal="bs-modal" class="modal fade disable-scroll" tabindex="-1" role="dialog"
+    aria-hidden="false">
+    <div class="modal-dialog modal-XL">
+      <div class="modal-content-wrapper">
+        <div class="modal-content">
+          <div class="modal-header clearfix text-left">
+            <button type="button" class="close" (click)="close()" aria-hidden="true"><i class="pg pg-close fs-14"></i>
+            </button>
+            <h5>Safety Culture <span class="semi-bold">{{ isCreate ? "Create" : "Update"}}</span></h5>
+          </div>
+          <form [formGroup]="databaseForm" #formDir="ngForm" (ngSubmit)="save()">
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label for="registryId" class="col-md-4 col-sm-4 col-form-label">Personnel ID /<br> Sicil</label>
+                    <div class="col-md-8 col-sm-8">
+                      <!-- <input id="registryId" type="text" class="form-control" formControlName="registryId" required> -->
+                      <pg-select id="registryId" style="width: 100%;" formControlName="registryId" [PlaceHolder]="''"
+                        required [AllowClear]="true" [ShowSearch]="true" (OpenChange)="getUserByRegisterId($event)"
+                        (SearchChange)="searchChanged($event)">
+                        <pg-option *ngFor="let register of registerIds" [Label]="register.label" [Value]="register"
+                          [Disabled]="register.disabled">
+                        </pg-option>
+                      </pg-select>
+                      <div *ngIf="registryId.invalid && (registryId.dirty || registryId.touched)"
+                        class="alert alert-danger">
+                        <div *ngIf="registryId.errors.required"> Personnel ID is required. </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="fullName" class="col-md-4 col-sm-4 col-form-label">Name - Surname /<br> Ad -
+                      Soyad</label>
+                    <div class="col-md-8 col-sm-8">
+                      <input id="fullName" type="text" class="form-control" formControlName="fullName" readonly>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="directorUnit" class="col-md-4 col-sm-4 col-form-label">Directorate /<br>
+                      Başkanlık</label>
+                    <div class="col-md-8 col-sm-8">
+                      <input id="directorUnit" type="text" class="form-control" formControlName="directorUnit" readonly>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="managerUnitCode" class="col-md-4 col-sm-4 col-form-label">Management /<br>
+                      Müdürlük</label>
+                    <div class="col-md-8 col-sm-8">
+                      <input id="managerUnitCode" type="text" class="form-control" formControlName="managerUnitCode"
+                        readonly>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="chiefUnit" class="col-md-4 col-sm-4 col-form-label">Chief Unit /<br> Şeflik</label>
+                    <div class="col-md-8 col-sm-8">
+                      <input id="chiefUnit" type="text" class="form-control" formControlName="chiefUnit" readonly>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="positionDescription" class="col-md-4 col-sm-4 col-form-label">Title /<br> Ünvan</label>
+                    <div class="col-md-8 col-sm-8">
+                      <input id="positionDescription" type="text" class="form-control"
+                        formControlName="positionDescription" readonly>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="files" class="col-md-4 col-sm-4 col-form-label">Attachments /<br> Ekler</label>
+                    <div class="col-md-8 col-sm-8">
+                      <input id="files" #fileInput type="file" class="form-control" multiple (change)="addFile()" />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="row form-group">
+                    <label style="padding: 0;" for="incidentDate" class="col-md-4 col-sm-4 col-form-label">Date
+                      /<br> Tarih</label>
+                    <div class="col-md-8 col-sm-8 date input-group">
+                      <pg-datepicker id="incidentDate" formControlName="incidentDate" [Format]="dateTimeFormat"
+                        ShowTime="true" required>
+                      </pg-datepicker>
+                      <div class="input-group-append">
+                        <span class="input-group-text">
+                          <i class="fa fa-calendar"></i>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="domestic" class="col-md-4 col-sm-4 col-form-label">Domectic-Abroad /<br> Yurt İçi -
+                      Yurt Dışı</label>
+                    <div class="col-md-8 col-sm-8">
+                      <pg-select id="domestic" style="width: 100%;" formControlName="domestic" [PlaceHolder]="''"
+                        required [AllowClear]="true" [ShowSearch]="true">
+                        <pg-option *ngFor="let domesticType of domesticTypes" [Label]="domesticType.label"
+                          [Value]="domesticType" [Disabled]="domesticType.disabled">
+                        </pg-option>
+                      </pg-select>
+                      <div *ngIf="domestic.invalid && (domestic.dirty || domestic.touched)" class="alert alert-danger">
+                        <div *ngIf="domestic.errors.required"> Domectic-Abroad is required. </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="location" class="col-md-4 col-sm-4 col-form-label">Location /<br> Lokasyon</label>
+                    <div class="col-md-8 col-sm-8">
+                      <pg-select id="location" style="width: 100%;" formControlName="location" [PlaceHolder]="''"
+                        required [AllowClear]="true" [ShowSearch]="true">
+                        <pg-option *ngFor="let locationType of locationTypes" [Label]="locationType.label"
+                          [Value]="locationType" [Disabled]="locationType.disabled">
+                        </pg-option>
+                      </pg-select>
+                      <div *ngIf="location.invalid && (location.dirty || location.touched)" class="alert alert-danger">
+                        <div *ngIf="location.errors.required"> Location is required. </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="incident" class="col-md-4 col-sm-4 col-form-label">Incident /<br> Olay</label>
+                    <div class="col-md-8 col-sm-8">
+                      <textarea id="incident" type="text" class="form-control" formControlName="incident"
+                        required></textarea>
+                      <div *ngIf="incident.invalid && (incident.dirty || incident.touched)" class="alert alert-danger">
+                        <div *ngIf="incident.errors.required"> Incident is required. </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="action" class="col-md-4 col-sm-4 col-form-label">Actions /<br> Alınan Aksiyonlar</label>
+                    <div class="col-md-8 col-sm-8">
+                      <textarea id="action" type="text" class="form-control" formControlName="action"
+                        required></textarea>
+                      <div *ngIf="action.invalid && (action.dirty || action.touched)" class="alert alert-danger">
+                        <div *ngIf="action.errors.required"> Actions are required. </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="result" class="col-md-4 col-sm-4 col-form-label">Result /<br> Sonuç</label>
+                    <div class="col-md-8 col-sm-8">
+                      <textarea id="result" type="text" class="form-control" formControlName="result"
+                        required></textarea>
+                      <div *ngIf="result.invalid && (result.dirty || result.touched)" class="alert alert-danger">
+                        <div *ngIf="result.errors.required"> Result is required. </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-2" *ngFor="let addedFile of removableFiles" style="margin-bottom: 15px;">
+                  <div class="position-relative" style="border: solid 1px #d4d4d4;border-radius: 5px;">
+                    <div class="col-md-12 padding-0">
+                      <a href="{{addedFile.fileUrl}}" class="btn btn-default full-width" target="_blank">
+                        <p class="p-t-5 p-b-5">
+                          <i class="{{addedFile.fileIcon}} fa-3x"></i>
+                        </p>
+                        <p title="{{addedFile.fileTitle}}" class="fs-12 font-montserrat text-uppercase"
+                          *ngIf="addedFile.fileTitle.length > 13"
+                          style="font-size:10px!important; color:lightslategray;line-height: 14px;">
+                          {{addedFile.fileTitle | slice:0:14}}...</p>
+                        <p title="{{addedFile.fileTitle}}" class="fs-12 font-montserrat text-uppercase"
+                          *ngIf="addedFile.fileTitle.length < 14"
+                          style="font-size:10px!important; color:lightslategray;line-height: 14px;">
+                          {{addedFile.fileTitle}}</p>
+                      </a>
+                    </div>
+                    <div class="position-absolute" style="top:0; right:0;">
+                      <a href="javascript:void(0);" (click)='addDeleteList(addedFile.id, addedFile.fileTitle)'
+                        class="pull-right"><i class="card-icon card-icon-close" style="color:darkred"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <div class="">
+                <button [disabled]="saving" type="button" class="btn btn-danger waves-effect m-1" (click)="close()">
+                  Cancel</button>
+                <button type="submit" class="btn btn-success  m-1" [disabled]="databaseForm.invalid">
+                  {{ isCreate ? "Create" : "Update"}}</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

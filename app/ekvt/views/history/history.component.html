@@ -1,0 +1,34 @@
+<pg-container>
+  <app-attachment-modal #attachModal>
+  </app-attachment-modal>
+  <app-create-or-update-database-modal #databaseModal (modalSave)="refresh()">
+  </app-create-or-update-database-modal>
+  <div class="card card-default">
+    <div class="card-header separator m-b-10">
+      <div class="btn-group card-header-btn-area float-left">
+        <input type="text" class="form-control m-r-10" placeholder="Search in all columns" [(ngModel)]="gridFullSearch"
+          (keyup)="onQuickFilterChanged()">
+        <button type="button" class="btn btn-secondary text-success" data-toggle="tooltip" data-placement="top"
+          title="Excel Export" (click)="onExcelExport()">
+          <i class="fa fa-file-excel-o"></i>
+        </button>
+        <button type="button" class="btn btn-secondary text-danger" data-toggle="tooltip" data-placement="top"
+          title="Pdf Export" (click)="exportToPdf()">
+          <i class="fa fa-file-pdf-o"></i>
+        </button>
+      </div>
+    </div>
+    <div class="card-body">
+      <app-simple-grid [gridRowData]="gridRowData" [gridStyle]="gridStyle" [gridColumnDefs]="gridColumnDefs"
+        [gridPageSize]="gridPageSize" [currentMainComponent]="this" [gridFullSearch]="gridFullSearch"
+        [gridActionButtons]="gridActionButtons">
+      </app-simple-grid>
+    </div>
+  </div>
+</pg-container>
+
+<script>
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  }) 
+</script>

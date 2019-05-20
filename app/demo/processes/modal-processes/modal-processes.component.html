@@ -1,0 +1,162 @@
+<div class="special-Modal">
+  <div bsModal #processModal="bs-modal" class="modal fade disable-scroll" tabindex="-1" role="dialog"
+    aria-hidden="false">
+    <div class="modal-dialog modal-XL">
+      <div class="modal-content-wrapper">
+        <div class="modal-content">
+          <div class="modal-header clearfix text-left">
+            <button type="button" class="close" (click)="close()" aria-hidden="true"><i class="pg pg-close fs-14"></i>
+            </button>
+            <h5>Process <span class="semi-bold">{{ isCreate === true ? "Create" : "Update"}}</span></h5>
+          </div>
+          <form [formGroup]="processForm" #formDir="ngForm" (ngSubmit)="save()">
+            <div class="modal-body">
+              <div class="row">
+
+                <div class="form-group row col-md-6">
+                  <label for="processName" class="col-sm-3">Process Name</label>
+                  <div class="col-sm-9">
+                    <input id="name" class="form-control" formControlName="processName" required>
+                    <div *ngIf="processName.invalid && (processName.dirty || processName.touched)"
+                      class="alert alert-danger">
+                      <div *ngIf="processName.errors.required"> Process name is required. </div>
+                      <div *ngIf="processName.errors.minlength"> Process name must be at least 4 characters long. </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row col-md-6">
+                  <label for="processCode" class="col-sm-3">Process Code</label>
+                  <div class="col-sm-9">
+                    <input id="processCode" class="form-control" formControlName="processCode" required>
+                    <div *ngIf="processCode.invalid && (processCode.dirty || processCode.touched)"
+                      class="alert alert-danger">
+                      <div *ngIf="processCode.errors.required"> Process code is required. </div>
+                      <div *ngIf="processCode.errors.minlength"> Process code must be at least 4 characters long. </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row col-md-6">
+                  <label for="parentProcessCode" class="col-sm-3">Parent Process Code</label>
+                  <div class="col-sm-9">
+                    <input id="parentProcessCode" class="form-control " formControlName="parentProcessCode" required>
+                    <div *ngIf="parentProcessCode.invalid && (parentProcessCode.dirty || parentProcessCode.touched)"
+                      class="alert alert-danger">
+                      <div *ngIf="parentProcessCode.errors.required"> Parent process code is required. </div>
+                      <div *ngIf="parentProcessCode.errors.minlength"> Parent process code must be at least 4 characters
+                        long. </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row col-md-6">
+                  <label for="supplier" class="col-sm-3">Supplier</label>
+                  <div class="col-sm-9">
+                    <input id="supplier" class="form-control" formControlName="supplier">
+                  </div>
+                </div>
+                <div class="form-group row col-md-6">
+                  <label for="input" class="col-sm-3">Input</label>
+                  <div class="col-sm-9">
+                    <input id="input" class="form-control" formControlName="input">
+                  </div>
+
+                </div>
+                <div class="form-group row col-md-6">
+                  <label for="output" class="col-sm-3">Output</label>
+                  <div class="col-sm-9">
+                    <input id="output" class="form-control" formControlName="output">
+                  </div>
+
+                </div>
+                <div class="form-group row col-md-6">
+                  <label for="customer" class="col-sm-3">Customer</label>
+                  <div class="col-sm-9">
+                    <input id="customer" class="form-control" formControlName="customer">
+                  </div>
+
+                </div>
+
+                <div class="form-group row col-md-6">
+                  <label for="processName" class="col-sm-3">Process Name</label>
+                  <div class="col-sm-9">
+                    <input id="name" class="form-control" formControlName="processName" required>
+                    <div *ngIf="processName.invalid && (processName.dirty || processName.touched)"
+                      class="alert alert-danger">
+                      <div *ngIf="processName.errors.required"> Process name is required. </div>
+                      <div *ngIf="processName.errors.minlength"> Process name must be at least 4 characters long. </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row col-md-6">
+                  <label for="processCode" class="col-sm-3">Process Code</label>
+                  <div class="col-sm-9">
+                    <input id="processCode" class="form-control" formControlName="processCode" required>
+                    <div *ngIf="processCode.invalid && (processCode.dirty || processCode.touched)"
+                      class="alert alert-danger">
+                      <div *ngIf="processCode.errors.required"> Process code is required. </div>
+                      <div *ngIf="processCode.errors.minlength"> Process code must be at least 4 characters long. </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row col-md-6">
+                  <label for="parentProcessCode" class="col-sm-3">Parent Process Code</label>
+                  <div class="col-sm-9">
+                    <input id="parentProcessCode" class="form-control " formControlName="parentProcessCode" required>
+                    <div *ngIf="parentProcessCode.invalid && (parentProcessCode.dirty || parentProcessCode.touched)"
+                      class="alert alert-danger">
+                      <div *ngIf="parentProcessCode.errors.required"> Parent process code is required. </div>
+                      <div *ngIf="parentProcessCode.errors.minlength"> Parent process code must be at least 4 characters
+                        long. </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row col-md-6">
+                  <label for="supplier" class="col-sm-3">Supplier</label>
+                  <div class="col-sm-9">
+                    <input id="supplier" class="form-control" formControlName="supplier">
+                  </div>
+                </div>
+                <div class="form-group row col-md-6">
+                  <label for="input" class="col-sm-3">Input</label>
+                  <div class="col-sm-9">
+                    <input id="input" class="form-control" formControlName="input">
+                  </div>
+
+                </div>
+                <div class="form-group row col-md-6">
+                  <label for="output" class="col-sm-3">Output</label>
+                  <div class="col-sm-9">
+                    <input id="output" class="form-control" formControlName="output">
+                  </div>
+
+                </div>
+                <div class="form-group row col-md-6">
+                  <label for="customer" class="col-sm-3">Customer</label>
+                  <div class="col-sm-9">
+                    <input id="customer" class="form-control" formControlName="customer">
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <div class="">
+                <button type="button" class="btn btn-secondary m-1" (click)="formDir.resetForm({})">
+                  Reset</button>
+                <button [disabled]="saving" type="button" class="btn btn-danger waves-effect m-1" (click)="close()">
+                  Cancel</button>
+                <button type="submit" class="btn btn-success  m-1" [disabled]="processForm.invalid">
+                  Submit</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

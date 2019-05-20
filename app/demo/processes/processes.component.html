@@ -1,0 +1,18 @@
+<pg-container extraHorizontalClass="bg-white" extraClass="bg-white">
+    <div class="row">
+        <div class="col-md-12">
+             <button class="btn btn-complete btn-cons m-l-10" (click)="createProcess()" ><i class="fa fa-plus"></i> Create Process</button>
+
+            <processes-modal #processModal (modalSave)="refresh()" ></processes-modal>
+        </div>
+        <div class="col-md-12">
+            <ag-grid-angular style="width: 500px; height: 500px;" class="ag-theme-balham" 
+                [rowData]="processes"
+                [columnDefs]="columnDefs"
+                [frameworkComponents]="frameworkComponents"
+                [context]="context"
+                >
+            </ag-grid-angular>
+        </div>
+    </div>
+</pg-container>

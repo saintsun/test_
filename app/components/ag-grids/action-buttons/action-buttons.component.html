@@ -1,0 +1,8 @@
+<span *ngFor="let button of buttons">
+  <a *ngIf="(params.node.data.showActions && isDisplayedAction(params.node.data.showActions, button.name)) || !params.node.data.showActions"
+    (click)="button.method(params)" class="{{button.class}}" title="{{button.title}}"><i class="{{button.icon}}"
+      aria-hidden="true"></i></a>
+  <!-- <a (click)="edit()" class="ml-2"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+  <a (click)="delete()" class="ml-2"><i class="fa fa-trash-o" aria-hidden="true"></i></a> -->
+  <!-- <a (click)="" -->
+</span>

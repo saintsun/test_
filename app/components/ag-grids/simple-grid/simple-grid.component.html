@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col-md-12 form-group">
+    <div *ngIf="gridShowCreateButton">
+      <button class="btn btn-primary pull-right" (click)="gridOpenCreateModal()" style="margin-left:15px;"><i
+          class="fa fa-plus"></i>&nbsp;Create</button>
+    </div>
+    <div *ngIf="gridExportExcel">
+      <button (click)="onBtExport()" class="btn btn-default pull-right"><i class="fa fa-download"></i>&nbsp;Export to
+        Excel</button>
+    </div>
+  </div>
+  <div class="col-md-12 input-group" *ngIf="gridFullSearchInside">
+    <input class="form-control" type="text" id="filter-text-box" placeholder="Search" aria-label="Search"
+      [(ngModel)]="gridFullSearch" (keyup)="onQuickFilterChanged()" />
+    <div class="input-group-append">
+      <span class="input-group-text" id="searchInputGroup"><i class="fa fa-search"></i>&nbsp;Search</span>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <ag-grid-angular #agGrid [ngStyle]="gridStyle" id="myGrid" class="ag-theme-balham" [columnDefs]="columnDefs"
+      [defaultColDef]="defaultColDef" [floatingFilter]="true" [rowSelection]="rowSelection"
+      [paginationPageSize]="gridPageSize" [pagination]="true"
+      [rowData]="rowData" [animateRows]="true" (gridReady)="onGridReady($event)"
+      [frameworkComponents]="frameworkComponents" [context]="context" [isFullWidthCell]="isFullWidthCell"
+      [fullWidthCellRenderer]="fullWidthCellRenderer" [getRowHeight]="getRowHeight" [doesDataFlower]="doesDataFlower"
+      [suppressRowClickSelection]="true">
+    </ag-grid-angular>
+  </div>
+</div>

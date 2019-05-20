@@ -1,0 +1,43 @@
+<div class="special-Modal">
+  <div bsModal #attachModal="bs-modal" class="modal fade disable-scroll" tabindex="-1" role="dialog"
+    aria-hidden="false">
+    <div class="modal-dialog modal-XL">
+      <div class="modal-content-wrapper">
+        <div class="modal-content">
+          <div class="modal-header clearfix text-left">
+            <button type="button" class="close" (click)="close()" aria-hidden="true"><i class="pg pg-close fs-14"></i>
+            </button>
+            <h5>Attachments / Ekler</h5>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-2" *ngFor="let file of attachments" style="margin-bottom: 15px;">
+                <div class="position-relative" style="border: solid 1px #d4d4d4;border-radius: 5px;">
+                  <div class="position-relative text-center" style="top:5px; right:0;"
+                    *ngIf="file.operationDetail !== undefined">
+                    <p style="font-weight: bold;">{{file.operationDetail}}</p>
+                  </div>
+                  <div class="col-md-12 padding-0">
+                    <a href="{{file.fileUrl}}" class="btn btn-default full-width" target="_blank">
+                      <p class="p-t-5 p-b-5">
+                        <i class="{{file.fileIcon}} fa-3x"></i>
+                      </p>
+                      <p title="{{file.fileTitle}}" class="fs-12 font-montserrat text-uppercase"
+                        *ngIf="file.fileTitle.length > 14"
+                        style="font-size:10px!important; color:lightslategray;line-height: 14px;">
+                        {{file.fileTitle | slice:0:14}}...</p>
+                      <p title="{{file.fileTitle}}" class="fs-12 font-montserrat text-uppercase"
+                        *ngIf="file.fileTitle.length < 15"
+                        style="font-size:10px!important; color:lightslategray;line-height: 14px;">
+                        {{file.fileTitle}}</p>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
